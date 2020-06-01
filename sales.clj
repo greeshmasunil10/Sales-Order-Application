@@ -16,19 +16,15 @@
 (defn db[file]
 (vec(map (fn [x] [(first x)(rest x) ]) (vec(map(fn [x] (split x #"\|")) (split-lines (slurp file)) )) ))
 )
+
 ( def cust_db (db "cust.txt"))
 ( def prod_db (db "prod.txt"))
 ( def sales_db (db "sales.txt"))
-
 
 (defn output_string[arg]
   (map(fn[x] 
    (str(str (name (x 0)) ":[" (join ", " (x 1)) "]"))
   ) arg))
-
-  
-(defn get-string [db, formatter]
-(join "\n" (map formatter (seq db))))
 
 (defn disp_cust_table[]
 (def out (sort (vec(output_string cust_db))))
