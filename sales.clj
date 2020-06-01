@@ -13,36 +13,74 @@
 (menu)
 (def choice (read-line))
 
-(defn db[file]
-(vec(map (fn [x] [(first x)(rest x) ]) (vec(map(fn [x] (split x #"\|")) (split-lines (slurp file)) )) ))
+(defn load_data[file]
+(into (sorted-map)(map (fn [x] [(first x)(rest x) ]) (vec(map(fn [x] (split x #"\|")) (split-lines (slurp file)) )) ))
 )
 
-( def cust_db (db "cust.txt"))
-( def prod_db (db "prod.txt"))
-( def sales_db (db "sales.txt"))
+( def cust_db (load_data "cust.txt"))
+( def prod_db (load_data "prod.txt"))
+( def sales_db (load_data "sales.txt"))
 
-(defn output_string[arg]
+(defn output_string
+([arg]
   (map(fn[x] 
    (str(str (name (x 0)) ":[" (join ", " (x 1)) "]"))
   ) arg))
+([arg1 arg2 arg3]
+	str(
+    (map(fn[x] 
+   (str(str (name (x 0)) ":[")) 
+        ) arg3)
+
+		(map(fn[x] 
+   (str( (join ", " (x 1)) "]"))
+        ) arg1)
+
+		(map(fn[x] 
+   (str( (join ", " (x 1)) "]"))
+        ) arg2)
+  ) 
+)
+)
+
+
+(defn display_sales_table [collection]
+  (if(= false (nil?(first collection)))
+  ;; (do (println "hello" ))
+  (do (def line (first collection))
+    (def cust_id (nth (first (rest line )) 0 ) )
+    (def prod_id (nth (first (rest line )) 1 ) )
+    (println (first line) ":["
+    (first (get cust_db cust_id)) ","
+    (first (get prod_db prod_id)) ","
+    (nth (first (rest line )) 2 )
+     "]"
+     )
+  )
+  )
+  (if (empty? collection)
+    (println " ")
+    (display_sales_table  (rest collection))
+  )
+)
+
 
 (defn disp_cust_table[]
-(def out (sort (vec(output_string cust_db))))
-(doseq [item out]
+(def result (sort (vec(output_string cust_db))))
+(doseq [item result]
    (println item))
-(println "You have opted for choice 1"))
+)
 
 (defn disp_prod_table[]
-(def out (sort (vec(output_string prod_db))))
-(doseq [item out]
+(def result (sort (vec(output_string prod_db))))
+(doseq [item result]
    (println item))
-(println "You have opted for choice 2"))
+)
 
 (defn disp_sales_table[]
-(def out (sort (vec(output_string sales_db))))
-(doseq [item out]
-   (println item))
-(println "You have opted for choice 3"))
+(display_sales_table  sales_db)
+(println "You have opted for choice 3")
+)
 
 (defn get_total_sales[](println "You have opted for choice 4"))
 (defn get_total_count[](println "You have opted for choice 5"))
@@ -55,7 +93,5 @@
 (if(= choice "6")(println "Good Bye!"))
 
 (println "the end")
-
-
 
 
