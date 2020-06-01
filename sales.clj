@@ -43,6 +43,19 @@
 )
 )
 
+(def namemap {})
+(defn load_map [collection]
+	  (def line (first collection))
+	  (def cust_id (nth (first (rest line )) 0 ) )
+    (def prod_id (nth (first (rest line )) 1 ) )
+	  (def namemap (assoc namemap (first line) 
+     [(first (get cust_db cust_id)), (first (get prod_db prod_id)),(nth (first (rest line )) 2 ) ]))
+  (if (empty? collection)
+    (println " ")
+    (load_map  (rest collection))
+  )
+)
+(load_map sales_db)
 
 (defn display_sales_table [collection]
   (if(= false (nil?(first collection)))
@@ -56,6 +69,8 @@
     (nth (first (rest line )) 2 )
      "]"
      )
+	  (def namemap (assoc namemap (first line) 
+     [(first (get cust_db cust_id)), (first (get prod_db prod_id)),(nth (first (rest line )) 2 ) ]))
   )
   )
   (if (empty? collection)
@@ -82,7 +97,31 @@
 (println "You have opted for choice 3")
 )
 
-(defn get_total_sales[](println "You have opted for choice 4"))
+(defn prom[] 
+(print "Enter Customer Name:")
+(println "?" )
+)
+(defn get_total_sales[]
+	(println "Enter Customer Name:")
+	(def custname (read-line))
+	(def valx (filter (fn [x]
+		(= (first x) custname))
+		(vals namemap)))
+	(def sum [])
+	(doseq [item1 valx] 
+	 (doseq [item2 (vals prod_db)]
+		(if(= (nth item1 1) (first item2))
+		(def sum  (conj sum (Float/parseFloat (first(rest item2)))))
+		)
+	 )
+	)
+	(println custname ":" (reduce + sum)) 
+
+)
+
+
+
+
 (defn get_total_count[](println "You have opted for choice 5"))
 
 (if(= choice "1")(disp_cust_table))
@@ -92,6 +131,6 @@
 (if(= choice "5")(get_total_count))
 (if(= choice "6")(println "Good Bye!"))
 
-(println "the end")
+(println "The End")
 
 
