@@ -116,13 +116,20 @@
 	 )
 	)
 	(println custname ":" (reduce + sum)) 
-
 )
 
-
-
-
-(defn get_total_count[](println "You have opted for choice 5"))
+(defn get_total_count[]
+	(println "Enter product Name:")
+	(def prodname (read-line))
+	(def valy (filter (fn [x]
+		(= (nth x 1) prodname))
+		(vals namemap)))
+	(def sum [])
+	(doseq [item valy] 
+		(def sum  (conj sum (Integer/parseInt (nth item 2)  )))
+	)
+	(println prodname ":" (reduce + sum)) 
+)
 
 (if(= choice "1")(disp_cust_table))
 (if(= choice "2")(disp_prod_table))
