@@ -1,4 +1,4 @@
-(ns clojure.sales
+(ns clojure.sam
 (:require [clojure.string :refer [split split-lines join]]))
 (defn menu []
    (println "*** Sales Menu ***")
@@ -28,20 +28,6 @@
 (def products-db  (to-database "prod.txt"))
 (def sales-db     (slurp"sales.txt"))
   
-
-(defn db[file]
-(vec(map (fn [x] [(first x)(rest x) ]) (vec(map(fn [x] (split x #"\|")) (split-lines (slurp file)) )) ))
-)
-( def cust_db (db "cust.txt"))
-( def prod_db (db "prod.txt"))
-( def sales_db (db "sales.txt"))
-
-
-(defn output_string[arg]
-  (map(fn[x] 
-   (str(str (name (x 0)) ":[" (join ", " (x 1)) "]"))
-  ) arg))
-
   
 (defn get-string [db, formatter]
 (join "\n" (map formatter (seq db))))
@@ -51,21 +37,14 @@
 
 
 (defn disp_cust_table[]
-(def out (sort (vec(output_string cust_db))))
-(doseq [item out]
-   (println item))
+(println customers-text)
 (println "You have opted for choice 1"))
 
 (defn disp_prod_table[]
-(def out (sort (vec(output_string prod_db))))
-(doseq [item out]
-   (println item))
+(println products-text )
 (println "You have opted for choice 2"))
 
 (defn disp_sales_table[]
-(def out (sort (vec(output_string sales_db))))
-(doseq [item out]
-   (println item))
 (println "You have opted for choice 3"))
 
 (defn get_total_sales[](println "You have opted for choice 4"))
@@ -78,8 +57,9 @@
 (if(= choice "5")(get_total_count))
 (if(= choice "6")(println "Good Bye!"))
 
-(println "the end")
-
-
-
+	(def line (split-lines (slurp "cust.txt")))
+	(def line1 (nth line 0))
+	(def x (split line1 #"\|"))
+	(def cmap {(first x) (rest x) })
+	(println cmap)
 
