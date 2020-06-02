@@ -73,21 +73,54 @@
 (print "Enter Customer Name:")
 (println "?" )
 )
+
+(defn inner [collection item1]
+(def item2 (first collection) )
+(if (= false (nil? (first collection)) )
+  (if(= (nth item1 1) (first item2))
+  (do
+  (def p1 (Float/parseFloat (first(rest item2))))
+  (def p2 (Float/parseFloat (nth item1 2)  ))
+  (def prod (* p1 p2))
+  (def sum  (conj sum prod ))
+  )
+  )
+)
+  (if (empty? collection)
+    (print-str " ")
+    (inner  (rest collection) item1))
+)
+
+
+(defn outer [collection]
+  (if (= false (nil? (first collection)) )
+  (inner (vals prod_db) (first collection))
+)
+  (if (empty? collection)
+    (print-str " ")
+    (outer  (rest collection)))
+)
+
+
+
 (defn get_total_sales[]
-	(println "Enter Customer Name:")
-	(def custname (read-line))
-	(def valx (filter (fn [x]
-		(= (first x) custname))
-		(vals namemap)))
-	(def sum [])
-	(doseq [item1 valx]
-	 (doseq [item2 (vals prod_db)]
-		(if(= (nth item1 1) (first item2))
-		(def sum  (conj sum (Float/parseFloat (first(rest item2)))))
-		)
-	 )
-	)
-	(println custname ":" (reduce + sum))
+(println "Enter Customer Name:")
+(def custname (read-line))
+(def valx (filter (fn [x]
+  (= (first x) custname))
+  (vals namemap)))
+(def sum [])
+(outer valx)
+(println custname ":" (reduce + sum))
+)
+
+(defn loopcoll [collection]
+(if (= false (nil? (first collection)) )
+  (def sum  (conj sum (Integer/parseInt (nth (first collection) 2)  )))
+)
+  (if (empty? collection)
+    (print-str "no more values to process")
+    (loopcoll  (rest collection)))
 )
 
 (defn get_total_count[]
@@ -97,11 +130,10 @@
 		(= (nth x 1) prodname))
 		(vals namemap)))
 	(def sum [])
-	(doseq [item valy]
-		(def sum  (conj sum (Integer/parseInt (nth item 2)  )))
-	)
+  (loopcoll valy)
 	(println prodname ":" (reduce + sum))
 )
+
 (defn menu []
   (println "--------------------------------------")
    (println "\n*** Sales Menu ***")
