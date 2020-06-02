@@ -96,7 +96,9 @@
   (def sum [])
   (println "--------------------------------------")
   (outer valx)
-  (println "\nTotal purchase value for"custname ":" (reduce + sum)))
+  (if(= 0 (reduce + sum))
+      (println "Customer not found /or hasn't made any purchases.")
+      (println "\nTotal purchase value for"custname ":" (reduce + sum))))
 
 (defn item_count_list [collection]
   (if (= false (nil? (first collection)) )
@@ -114,7 +116,9 @@
 	(def sum [])
   (item_count_list valy)
   (println "--------------------------------------")
-	(println "Total number of"prodname "sold:" (reduce + sum)))
+  (if(= 0 (reduce + sum))
+      (println "Product not found /or has not been sold.")
+      (println "No of"prodname "sold:" (reduce + sum))))
 
 (defn menu []
   (println "--------------------------------------")
