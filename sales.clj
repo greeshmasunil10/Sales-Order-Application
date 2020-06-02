@@ -119,10 +119,10 @@
 (defn menu_func[]
      (menu)
      (def choice (read-line) )
-     (if(= "" choice) (def choice "0") )
+     (if(= "" choice) (def choice "-1") )
      (def choice (read-string choice) )
      (println "--------------------------------------")
-     (if (= false ( contains? {1 2 3 4 5 6} choice ))
+     (if (= false ( contains? [1 2 3 4 5 6 7] choice ))
        (println "Invalid choice!"))
      (if (= choice 1)(disp_cust_table))
      (if (= choice 2)(disp_prod_table))
