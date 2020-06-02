@@ -46,15 +46,21 @@
 
 (defn disp_cust_table[]
   (def result (sort (vec(output_string cust_db))))
+	(println "Customer Table")
+  (println "--------------------------------------")
   (doseq [item result]
     (println item)))
 
 (defn disp_prod_table[]
   (def result (sort (vec(output_string prod_db))))
+	(println "Product Table")
+  (println "--------------------------------------")
   (doseq [item result]
     (println item)))
 
 (defn disp_sales_table[]
+	(println "Sales Table")
+  (println "--------------------------------------")
   (display_sales_table  sales_db))
 
 (defn inner [collection item1]
@@ -62,9 +68,13 @@
   (if (= false (nil? (first collection)) )
       (if(= (nth item1 1) (first item2))
         (do
-          (def p1 (Float/parseFloat (first(rest item2))))
-          (def p2 (Float/parseFloat (nth item1 2)  ))
-          (def prod (* p1 p2))
+          (def price (Float/parseFloat (first(rest item2))))
+          (def item_count (Float/parseFloat (nth item1 2)  ))
+          (def item_name (nth item1 1)  )
+          (def prod (* price item_count))
+          (println "Item:" item_name "Price:"price "Qty:" item_count)
+          ;; (use 'clojure.pprint)
+          ;; (print-table [{:Item item_name :Qty price :Price item_count}])
           (def sum  (conj sum prod )))))
   (if (empty? collection)
     (print-str " ")
@@ -84,8 +94,9 @@
   (= (first x) custname))
   (vals namemap)))
   (def sum [])
+  (println "--------------------------------------")
   (outer valx)
-  (println custname ":" (reduce + sum)))
+  (println "\nTotal purchase value for"custname ":" (reduce + sum)))
 
 (defn item_count_list [collection]
   (if (= false (nil? (first collection)) )
@@ -102,7 +113,8 @@
 		(vals namemap)))
 	(def sum [])
   (item_count_list valy)
-	(println prodname ":" (reduce + sum)))
+  (println "--------------------------------------")
+	(println "Total number of"prodname "sold:" (reduce + sum)))
 
 (defn menu []
   (println "--------------------------------------")
