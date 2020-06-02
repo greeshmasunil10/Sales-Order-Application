@@ -50,9 +50,9 @@
     (println item)))
 
 (defn disp_prod_table[]
-(def result (sort (vec(output_string prod_db))))
-(doseq [item result]
-   (println item)))
+  (def result (sort (vec(output_string prod_db))))
+  (doseq [item result]
+    (println item)))
 
 (defn disp_sales_table[]
   (display_sales_table  sales_db))
