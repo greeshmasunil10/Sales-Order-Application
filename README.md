@@ -4,9 +4,9 @@ An application for managing sales order using Clojure programming
 * Customer sales report, Product sales report
  
 ## Screenshots
-![](Capture1.png)
-![](Capture2.png)
-![](Capture3.png)
+![](Capture1.PNG)
+![](Capture2.PNG)
+![](Capture3.PNG)
 
 ## Intructions 
  Shell command : clj sales.clj to run
