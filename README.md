@@ -1,5 +1,5 @@
 # Sales Order Application
-An application for managing sales order using Clojure programming
+A simple application for managing sales order using Clojure programming
 * Stores customer, products information
 * Customer sales report, Product sales report
  
