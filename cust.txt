@@ -1,3 +1,10 @@
-1|greeshma|123 Here Street|456-4567
-3|aju|165 Happy Lane|345-4533
-2|molu|43 Rose Court Street|345-7867
+1|John Smith|123 Here Street|456-4567
+2|Jane Jones|43 Rose Court Street|345-7867
+3|Rachel Green|165 Happy Lane|345-4533
+4|Dan White|46 Boose Street|345-9080
+5|Tom Jones|4445 Sue Lane|356-7895
+6|Mary Dex|2 Pizza Place|345-5677
+7|Sam Bo|456 Dale Place|345-9872
+8|Ted Mosby|222 Dale Place|345-9873
+9|Howard Baxter|123 Dale Place|345-9874
+

@@ -1,6 +1,11 @@
-1|shoes|10.00
-2|milk|2.0
-3|jam|10.0
-4|gum|5.0
-5|eggs|3.0
-6|jacket|40.00
+1|shoes|14.96
+2|milk|1.98
+3|jam|2.99
+4|gum|1.25
+5|eggs|2.98
+6|jacket|42.99
+7|hammer|19.99
+8|cup|4.98
+9|juice|0.99
+10|pie|19.29
+11|paper|7.89
